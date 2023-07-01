@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Entities.S23S.Arch.Team</Authors>
+    <Company>S23Sports</Company>
+    <Description>Package of transversal entities for S23Sports platform</Description>
+    <Copyright>S23Sports</Copyright>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Se ajusta nomrbe de propiedad para Client en la Entidad ClientUser. Se Agrega Logo para el Nuget</PackageReleaseNotes>
+    <PackageIcon>LogoNuget.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Utils.S23S.NuGet">
+      <HintPath>..\..\..\Utils\Utils\Utils\bin\Release\net6.0\Utils.S23S.NuGet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
