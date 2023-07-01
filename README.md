@@ -1,0 +1,2 @@
+# Entities
+Entidades transversales
