@@ -4,12 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Authors>Entities.S23S.Arch.Team</Authors>
+    <Authors>MYSQLConnector.S23S.Arch.Team</Authors>
     <Company>S23Sports</Company>
-    <Description>Package of transversal entities for S23Sports platform</Description>
+    <Description>Package of transversal connector for S23Sports platform</Description>
     <Copyright>S23Sports</Copyright>
     <Version>1.0.0</Version>
-    <PackageReleaseNotes>Versión inicial de MYSQLConnector</PackageReleaseNotes>
+    <PackageReleaseNotes>MYSQLConnector initial version</PackageReleaseNotes>
     <PackageIcon>LogoNuget.png</PackageIcon>
   </PropertyGroup>
 
