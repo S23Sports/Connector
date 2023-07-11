@@ -8,10 +8,17 @@
     <Company>S23Sports</Company>
     <Description>Package of transversal entities for S23Sports platform</Description>
     <Copyright>S23Sports</Copyright>
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>Se ajusta nomrbe de propiedad para Client en la Entidad ClientUser. Se Agrega Logo para el Nuget</PackageReleaseNotes>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>Versión inicial de MYSQLConnector</PackageReleaseNotes>
     <PackageIcon>LogoNuget.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\Documentación\img\LogoNuget.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MySqlConnector" Version="2.2.6" />
