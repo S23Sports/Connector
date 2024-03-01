@@ -7,8 +7,8 @@
     <Authors>MYSQLConnector.S23S.Arch.Team</Authors>
     <Company>S23Sports</Company>
     <Description>Package of transversal connector for S23Sports platform</Description>
-    <Copyright>S23Sports</Copyright>
-    <Version>1.0.0</Version>
+    <Copyright>S23Software</Copyright>
+    <Version>1.0.1</Version>
     <PackageReleaseNotes>MYSQLConnector initial version</PackageReleaseNotes>
     <PackageIcon>LogoNuget.png</PackageIcon>
   </PropertyGroup>

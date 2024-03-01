@@ -1,9 +1,4 @@
 ﻿using MySqlConnector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utils.S23S.NuGet.CipherAES256;
 using Utils.S23S.NuGet.Response;
 
@@ -34,15 +29,15 @@ namespace MYSQLConnector.S23S.NuGet
             {
                 if (String.IsNullOrWhiteSpace(connectionString))
                 {
-                    return new ApiResult(StatusCodes.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(GetQuery)}");
+                    return new ApiResult(StateOperation.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(GetQuery)}");
                 }
 
                 if (!String.IsNullOrWhiteSpace(pwdAES))
                 {
                     ApiResult ciph = CipherAES.Cipher(connectionString, pwdAES.PadRight(32, 'S'), false);
-                    if (ciph.code != StatusCodes.OK)
+                    if (ciph.code != StateOperation.OK)
                     {
-                        return new ApiResult(StatusCodes.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
+                        return new ApiResult(StateOperation.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
                     }
 
                     connectionString = ciph.oDyn?.ToString() ?? String.Empty;
@@ -50,7 +45,7 @@ namespace MYSQLConnector.S23S.NuGet
 
 
                 List<object[]> list = new List<object[]>();
-                StatusCodes state;
+                StateOperation state;
 
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -70,7 +65,7 @@ namespace MYSQLConnector.S23S.NuGet
 
                     using(MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        state = (reader.HasRows) ? StatusCodes.OK : StatusCodes.NoContent;
+                        state = (reader.HasRows) ? StateOperation.OK : StateOperation.NoContent;
                         while (reader.Read())
                         {
                             object[] values = new object[reader.FieldCount];
@@ -89,7 +84,7 @@ namespace MYSQLConnector.S23S.NuGet
             }
             catch (Exception ex)
             {
-                return new ApiResult(StatusCodes.InternalServerError, ex);
+                return new ApiResult(StateOperation.InternalServerError, ex);
             }
         }
 
@@ -99,19 +94,19 @@ namespace MYSQLConnector.S23S.NuGet
             {
                 if (String.IsNullOrWhiteSpace(connectionString))
                 {
-                    return new ApiResult(StatusCodes.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(InsertQuery)}");
+                    return new ApiResult(StateOperation.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(InsertQuery)}");
                 }
                 if (parameters == null)
                 {
-                    return new ApiResult(StatusCodes.InvalidRequest, true, "Sin parámetros para insertar el registro");
+                    return new ApiResult(StateOperation.InvalidRequest, true, "Sin parámetros para insertar el registro");
                 }
 
                 if (!String.IsNullOrWhiteSpace(pwdAES))
                 {
                     ApiResult ciph = CipherAES.Cipher(connectionString, pwdAES.PadRight(32, 'S'), false);
-                    if (ciph.code != StatusCodes.OK)
+                    if (ciph.code != StateOperation.OK)
                     {
-                        return new ApiResult(StatusCodes.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
+                        return new ApiResult(StateOperation.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
                     }
 
                     connectionString = ciph.oDyn?.ToString() ?? String.Empty;
@@ -139,11 +134,11 @@ namespace MYSQLConnector.S23S.NuGet
 
                     if (insertedId > 0)
                     {
-                        result = new ApiResult(StatusCodes.OK, insertedId);
+                        result = new ApiResult(StateOperation.OK, insertedId);
                     }
                     else
                     {
-                        result = new ApiResult(StatusCodes.InternalServerError, new Exception("Error no controlado al insertar el registro"));
+                        result = new ApiResult(StateOperation.InternalServerError, new Exception("Error no controlado al insertar el registro"));
                     }
 
                     connection.Close();
@@ -153,7 +148,7 @@ namespace MYSQLConnector.S23S.NuGet
             }
             catch (Exception ex)
             {
-                return new ApiResult(StatusCodes.InternalServerError, ex);
+                return new ApiResult(StateOperation.InternalServerError, ex);
             }
         }
 
@@ -166,19 +161,19 @@ namespace MYSQLConnector.S23S.NuGet
 
                 if (String.IsNullOrWhiteSpace(connectionString))
                 {
-                    return new ApiResult(StatusCodes.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(UpdateQuery)}");
+                    return new ApiResult(StateOperation.InvalidRequest, true, $"La cadena de conexión está vacía. Seg: {nameof(UpdateQuery)}");
                 }
                 if (parameters == null)
                 {
-                    return new ApiResult(StatusCodes.InvalidRequest, true, "Sin parámetros para actualizar el registro");
+                    return new ApiResult(StateOperation.InvalidRequest, true, "Sin parámetros para actualizar el registro");
                 }
 
                 if (!String.IsNullOrWhiteSpace(pwdAES))
                 {
                     ApiResult ciph = CipherAES.Cipher(connectionString, pwdAES.PadRight(32, 'S'), false);
-                    if (ciph.code != StatusCodes.OK)
+                    if (ciph.code != StateOperation.OK)
                     {
-                        return new ApiResult(StatusCodes.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
+                        return new ApiResult(StateOperation.InvalidRequest, true, $"{ciph.message} - Seg: {nameof(GetQuery)}");
                     }
 
                     connectionString = ciph.oDyn?.ToString() ?? String.Empty;
@@ -209,11 +204,11 @@ namespace MYSQLConnector.S23S.NuGet
 
                     if (cantRowsAffected > 0)
                     {
-                        result = new ApiResult(StatusCodes.OK, cantRowsAffected);
+                        result = new ApiResult(StateOperation.OK, cantRowsAffected);
                     }
                     else
                     {
-                        result = new ApiResult(StatusCodes.InternalServerError, new Exception("Error no controlado al actualizar el registro"));
+                        result = new ApiResult(StateOperation.InternalServerError, new Exception("Error no controlado al actualizar el registro"));
                     }
 
                     connection.Close();
@@ -223,7 +218,7 @@ namespace MYSQLConnector.S23S.NuGet
             }
             catch (Exception ex)
             {
-                return new ApiResult(StatusCodes.InternalServerError, ex);
+                return new ApiResult(StateOperation.InternalServerError, ex);
             }
         }
 
